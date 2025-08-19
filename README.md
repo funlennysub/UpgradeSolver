@@ -1,5 +1,10 @@
 # UpgradeSolver
 
+## Usage
+- Open any gear screen
+- Select upgrades with `N` for solving
+- Press solve
+
 ## TODO:
 - [x] Support stackable and hollow upgrades
 - [x] Check for level requirement to enable rotations

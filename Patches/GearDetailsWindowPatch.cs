@@ -18,4 +18,11 @@ public class GearDetailsWindowPatch
     {
         Plugin.Instance.OnGearDetailsWindowClosed();
     }
+
+    [HarmonyPostfix]
+    [HarmonyPatch(nameof(GearDetailsWindow.SwitchUpgradeView))]
+    private static void SwitchUpgradeView(GearDetailsWindow __instance)
+    {
+        Plugin.Instance.SolverUI.RebuildSelectedUpgrades();
+    }
 }

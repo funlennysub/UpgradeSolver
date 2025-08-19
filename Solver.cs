@@ -126,7 +126,7 @@ public class Solver(GearDetailsWindow gearDetailsWindow, List<UpgradeInstance> u
             return;
         }
 
-        Plugin.Instance.solverCoroutine = Plugin.Instance.StartCoroutine(SolveAndNotify(onComplete));
+        Plugin.Instance.SolverCoroutine = Plugin.Instance.StartCoroutine(SolveAndNotify(onComplete));
     }
 
     public bool CanFitAll()

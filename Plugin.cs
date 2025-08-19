@@ -1,5 +1,4 @@
-﻿using System;
-using BepInEx;
+﻿using BepInEx;
 using BepInEx.Logging;
 using HarmonyLib;
 using UnityEngine;
@@ -9,13 +8,13 @@ namespace UpgradeSolver;
 [BepInPlugin(MyPluginInfo.PLUGIN_GUID, MyPluginInfo.PLUGIN_NAME, MyPluginInfo.PLUGIN_VERSION)]
 public class Plugin : BaseUnityPlugin
 {
-    public Coroutine? solverCoroutine;
+    public Coroutine? SolverCoroutine;
 
     internal static Plugin Instance = null!;
-    internal static new ManualLogSource Logger;
+    internal new static ManualLogSource Logger = null!;
     private static Harmony _harmony = null!;
 
-    private SolverUI _solverUI = new SolverUI(null, null);
+    internal SolverUI SolverUI = new(null);
 
     private void Awake()
     {
@@ -24,7 +23,6 @@ public class Plugin : BaseUnityPlugin
 
         _harmony = new Harmony("UpgradeSolverPatches");
         _harmony.PatchAll(typeof(Patches.GearDetailsWindowPatch));
-        _harmony.PatchAll(typeof(Patches.MenuPatch));
 
         Logger.LogInfo($"Plugin {MyPluginInfo.PLUGIN_GUID} is loaded!");
     }
@@ -34,20 +32,15 @@ public class Plugin : BaseUnityPlugin
         _harmony.UnpatchSelf();
     }
 
-    internal void OnMenuOpen(Menu menu)
-    {
-        _solverUI.Menu = menu;
-    }
-
     internal void OnGearDetailsWindowOpen(GearDetailsWindow window)
     {
-        _solverUI.GearDetailsWindow = window;
-        _solverUI.PatchUpgradeClick();
-        _solverUI.AddButtonWithPopout();
+        SolverUI.GearDetailsWindow = window;
+        SolverUI.PatchUpgradeClick();
+        SolverUI.AddSolveButton();
     }
 
     internal void OnGearDetailsWindowClosed()
     {
-        _solverUI.Close();
+        SolverUI.Close();
     }
 }

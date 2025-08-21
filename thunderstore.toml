@@ -4,7 +4,6 @@ schemaVersion = "0.0.1"
 [package]
 namespace = "funlennysub"
 name = "UpgradeSolver"
-versionNumber = "0.1.1"
 description = "Upgrade placement solver"
 websiteUrl = "https://github.com/funlennysub/UpgradeSolver"
 containsNsfwContent = false

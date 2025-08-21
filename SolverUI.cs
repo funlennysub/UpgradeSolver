@@ -86,9 +86,9 @@ public class SolverUI
             .Where(ui => _selectedUpgrades.ContainsKey(ui.Upgrade.InstanceID))
             .ToDictionary(ui => ui.Upgrade.InstanceID);
 
-        foreach (var (_, selectedUpgrade) in _selectedUpgrades)
+        foreach (var selectedUpgradeKv in _selectedUpgrades)
         {
-            selectedUpgrade.button.SetDefaultColor(selectedUpgrade.button.hoverColor);
+            selectedUpgradeKv.Value.button.SetDefaultColor(selectedUpgradeKv.Value.button.hoverColor);
         }
 
         SetSolveButtonInteractable(_selectedUpgrades.Count > 0);
@@ -168,8 +168,8 @@ public class SolverUI
 
             var upgrades = _selectedUpgrades
                 .Select(u => u.Value.Upgrade)
-                .OrderByDescending(u => u.Upgrade.Rarity)
-                .ThenBy(u => u.Upgrade.Name).ToList();
+                .OrderByDescending(u => u.Upgrade.Pattern.GetCellCount())
+                .ToList();
 
             var solver = new Solver(GearDetailsWindow, upgrades);
             Plugin.Logger.LogInfo($"Can fit in theory?: {solver.CanFitAll()}");

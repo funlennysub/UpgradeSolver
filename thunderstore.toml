@@ -17,7 +17,7 @@ readme = "README.md"
 outdir = "build"
 
 [[build.copy]]
-source = "bin/Release/netstandard2.1/UpgradeSolver.dll"
+source = "bin/Release/net48/UpgradeSolver.dll"
 target = "BepInEx/plugins/UpgradeSolver.dll"
 
 [[build.copy]]
